@@ -19,8 +19,8 @@ export class LoginController extends AccountManagementBaseController {
     }
     
     if (loginValidationResult === OpResult.Success) {
-      await this.loginService.login(loginWebsiteDto.username);
-      return res.status(200).json()
+      const sessionId = await this.loginService.login(loginWebsiteDto.username);
+      return res.status(200).json({sessionId: sessionId});
     }
     
     const responseObj = resultMapping[loginValidationResult]
