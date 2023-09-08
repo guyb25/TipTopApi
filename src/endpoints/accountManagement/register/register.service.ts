@@ -1,7 +1,7 @@
 import { Injectable, Res } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registerWebsiteDto';
-import { Result } from 'src/models/OperationResult';
+import { OpResult } from 'src/models/OpResult';
 
 @Injectable()
 export class RegisterService {
@@ -9,16 +9,16 @@ export class RegisterService {
     this.serversDbService = serversDbService;
   }
 
-  async isRegistrationFormValid(registerWebsiteDto: RegisterWebsiteDto): Promise<Result> {
+  async isRegistrationFormValid(registerWebsiteDto: RegisterWebsiteDto): Promise<OpResult> {
     if (await this.serversDbService.isEmailTaken(registerWebsiteDto.email)) {
-      return Result.EmailTaken;
+      return OpResult.EmailTaken;
     }
 
     if (await this.serversDbService.isUsernameTaken(registerWebsiteDto.username)) {
-      return Result.UserTaken;
+      return OpResult.UserTaken;
     }
 
-    return Result.Success;
+    return OpResult.Success;
   }
 
   async register(registerWebsiteDto: RegisterWebsiteDto): Promise<void> {

@@ -3,7 +3,7 @@ import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registe
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
 import { RegisterService } from './register.service';
 import { Response } from 'express';
-import { Result } from 'src/models/OperationResult';
+import { OpResult } from 'src/models/OpResult';
 
 export class RegisterController extends AccountManagementBaseController {
   @Inject(RegisterService)
@@ -14,11 +14,11 @@ export class RegisterController extends AccountManagementBaseController {
     const formValidationResult = await this.registerService.isRegistrationFormValid(registerWebsiteDto);
 
     const resultMapping = {
-      [Result.EmailTaken] : { statusCode: 409, message: "The email is already taken" },
-      [Result.UserTaken] : { statusCode: 409, message: "The username is already taken" }
+      [OpResult.EmailTaken] : { statusCode: 409, message: "The email is already taken" },
+      [OpResult.UserTaken] : { statusCode: 409, message: "The username is already taken" }
     }
     
-    if (formValidationResult === Result.Success) {
+    if (formValidationResult === OpResult.Success) {
       await this.registerService.register(registerWebsiteDto);
       return res.status(200).json()
     }

@@ -17,6 +17,10 @@ export class ServersDbService {
         return await this.WebsiteModel.findOne({ email: email}) !== null;
     }
 
+    async doesUserMatchPassword(username: string, password: string): Promise<boolean> {
+        return (await this.WebsiteModel.findOne({ username: username})).password === password;
+    }
+
     async registerWebsite(registerWebsiteDto : RegisterWebsiteDto): Promise<void> {
         const websiteProps = new Website(
             registerWebsiteDto.name,
