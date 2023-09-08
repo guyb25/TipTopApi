@@ -1,8 +1,8 @@
 import { Body, Delete } from '@nestjs/common';
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
-import { AccountTerminationDto } from 'src/DTOs/accountManagement/accountTerminationDto';
+import { AccountTerminationDto } from 'src/endpoints/dtos/accountManagement/accountTerminationDto';
 
-export class AccountTerminationController extends AccountManagementBaseController {
+export class TerminateController extends AccountManagementBaseController {
   @Delete("/terminate")
   register(@Body() loginWebsiteDto: AccountTerminationDto): string {
     return loginWebsiteDto.name;

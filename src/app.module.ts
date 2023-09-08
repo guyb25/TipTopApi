@@ -5,10 +5,10 @@ import { AccountManagementModule } from './endpoints/accountManagement/accountMa
 import { surfingModule } from './endpoints/websiteSurfing/surfingModule.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './http-exception.filter';
-import { redisConfig } from './config/redis.config';
+import { mongoConfig, redisConfig } from './config/config';
 
 @Module({
-  imports: [AccountManagementModule.forRoot(redisConfig.host, redisConfig.port), surfingModule],
+  imports: [AccountManagementModule.forRoot(redisConfig.host, redisConfig.port, mongoConfig.connectionString), surfingModule],
   controllers: [AppController],
   providers: [AppService, 
     {
