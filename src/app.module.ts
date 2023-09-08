@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { accountManagementModule } from './endpoints/accountManagement/accountManagement.module';
+import { AccountManagementModule } from './endpoints/accountManagement/accountManagement.module';
 import { surfingModule } from './endpoints/websiteSurfing/surfingModule.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './http-exception.filter';
+import { redisConfig } from './config/redis.config';
 
 @Module({
-  imports: [accountManagementModule, surfingModule],
+  imports: [AccountManagementModule.forRoot(redisConfig.host, redisConfig.port), surfingModule],
   controllers: [AppController],
   providers: [AppService, 
     {

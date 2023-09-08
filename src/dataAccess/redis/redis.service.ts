@@ -1,15 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import Redis from 'ioredis';
 
 @Injectable()
 export class RedisService {
-  private readonly redisClient: Redis;
+  private redisClient: Redis;
 
-  constructor() {
-    // Initialize the Redis client
+  constructor(@Inject('REDIS_HOST') private readonly host: string, @Inject('REDIS_PORT') private readonly port: number) {
     this.redisClient = new Redis({
-      host: 'localhost',
-      port: 6379
+      host: host,
+      port: port
     });
   }
 
