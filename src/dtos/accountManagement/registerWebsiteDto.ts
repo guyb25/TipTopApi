@@ -8,6 +8,10 @@ export class RegisterWebsiteDto {
 
     @IsString()
     @ApiProperty()
+    username: string;
+
+    @IsString()
+    @ApiProperty()
     password: string;
 
     @IsString()
@@ -25,4 +29,12 @@ export class RegisterWebsiteDto {
     @IsArray()
     @ApiProperty()
     tags: string[];
+
+    @IsArray()
+    @ApiProperty()
+    email: string;
+
+    @IsArray()
+    @ApiProperty()
+    link: string;
 }

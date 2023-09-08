@@ -1,13 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RegisterController } from './Business/Administration/Register/register.controller';
-import { LoginController } from './Business/Administration/Login/login.controller';
-import { AdministrationModule } from './Business/Administration/administration.module';
+import { accountManagementModule } from './endpoints/accountManagement/accountManagement.module';
+import { surfingModule } from './endpoints/websiteSurfing/surfingModule.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 @Module({
-  imports: [AdministrationModule],
+  imports: [accountManagementModule, surfingModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, 
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter
+    }],
 })
 export class AppModule {}
