@@ -1,5 +1,4 @@
 import { Module, DynamicModule } from '@nestjs/common';
-import { GetWebsiteController } from './getWebsite/getWebsite.controller';
 import { GetWebsitesController } from './getWebsites/getWebsites.controller';
 import { GetWebsitesService } from './getWebsites/getWebsites.service';
 import { ServersDbModule } from 'src/dataAccess/serversDb/serversDb.module';
@@ -10,7 +9,7 @@ export class SurfingModule {
     return {
       module: SurfingModule,
       imports: [ServersDbModule.forRoot(mongoDbConnectionString)],
-      controllers: [GetWebsiteController, GetWebsitesController],
+      controllers: [GetWebsitesController],
       providers: [GetWebsitesService],
     }
   }

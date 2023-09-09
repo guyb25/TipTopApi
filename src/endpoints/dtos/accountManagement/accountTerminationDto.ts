@@ -4,9 +4,9 @@ import { IsString } from "class-validator";
 export class AccountTerminationDto {
     @IsString()
     @ApiProperty()
-    name: string;
+    username: string;
 
     @IsString()
     @ApiProperty()
-    sessionKey: string;
+    sessionId: string;
 }

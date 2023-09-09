@@ -41,4 +41,8 @@ export class ServersDbService {
     async getWebsitesWithName(name: string): Promise<Website[]> {
         return await this.WebsiteModel.find({ name: name})
     }
+
+    async deleteWebsite(username: string): Promise<void> {
+        await this.WebsiteModel.deleteOne({username: username});
+    }
 }

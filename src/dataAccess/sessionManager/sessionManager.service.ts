@@ -5,7 +5,7 @@ import { RedisService } from '../redis/redis.service';
 @Injectable()
 export class SessionManagerService {
     @Inject(RedisService)
-    private readonly redisService : RedisService;
+    private redisService : RedisService;
     
     async createSession(user : string) : Promise<string> {
         const sessionId : string = uuidv4();
@@ -19,5 +19,9 @@ export class SessionManagerService {
         }
 
         await this.redisService.deleteKey(sessionId);
+    }
+
+    async getSession(sessionId: string): Promise<string> {
+        return await this.redisService.getValue(sessionId);
     }
 }

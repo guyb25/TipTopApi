@@ -6,7 +6,6 @@ import { OpResult } from 'src/models/OpResult';
 @Injectable()
 export class RegisterService {
   constructor(private readonly serversDbService: ServersDbService) {
-    this.serversDbService = serversDbService;
   }
 
   async isRegistrationFormValid(registerWebsiteDto: RegisterWebsiteDto): Promise<OpResult> {

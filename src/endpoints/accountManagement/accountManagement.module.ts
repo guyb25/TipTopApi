@@ -9,6 +9,7 @@ import { LogoutService } from './logout/logout.service';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
 import { RegisterService } from './register/register.service';
 import { ServersDbModule } from 'src/dataAccess/serversDb/serversDb.module';
+import { TerminateService } from './terminate/terminate.service';
 
 @Module({})
 export class AccountManagementModule {
@@ -17,7 +18,7 @@ export class AccountManagementModule {
       module: AccountManagementModule,
       imports: [SessionManagerModule.forRoot(redisHost, redisPort), ServersDbModule.forRoot(mongoDbConnectionString)],
       controllers: [RegisterController, LoginController, LogoutController, TerminateController],
-      providers: [LoginService, LogoutService, RegisterService, HttpExceptionFilter],
+      providers: [LoginService, LogoutService, RegisterService, TerminateService, HttpExceptionFilter],
     }
   }
 }

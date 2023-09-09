@@ -3,5 +3,6 @@ export enum OpResult {
     UserTaken,
     EmailTaken,
     UserNotExist,
-    IncorrectPassword
+    IncorrectPassword,
+    SessionNotFound
 }
