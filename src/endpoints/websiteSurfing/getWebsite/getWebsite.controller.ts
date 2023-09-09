@@ -1,4 +1,4 @@
-import { Body, Get, Param } from '@nestjs/common';
+import { Get, Param } from '@nestjs/common';
 import { SurfingBaseController } from '../surfingBase.controller';
 
 export class GetWebsiteController extends SurfingBaseController {

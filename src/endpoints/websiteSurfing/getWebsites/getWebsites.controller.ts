@@ -1,9 +1,14 @@
-import { Body, Post } from '@nestjs/common';
+import { Body, Post, Inject } from '@nestjs/common';
 import { SurfingBaseController } from '../surfingBase.controller';
+import { GetWebsitesService } from './getWebsites.service';
+import { WebsiteDto } from 'src/endpoints/dtos/websiteSurfing/websiteDto';
 
 export class GetWebsitesController extends SurfingBaseController {
-  @Post("/websites")
-  register(@Body() websites: string[]): string {
-    return websites[0];
-  }
+    @Inject(GetWebsitesService)
+    private readonly getWebsitesService: GetWebsitesService;
+
+    @Post("/websites")
+    async register(@Body() websitesNames: string[]): Promise<WebsiteDto[]> {
+        return await this.getWebsitesService.getWebsites(websitesNames);
+    }
 }

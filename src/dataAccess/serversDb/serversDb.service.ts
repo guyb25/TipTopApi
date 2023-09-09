@@ -37,4 +37,8 @@ export class ServersDbService {
         const newWebsite = new this.WebsiteModel(websiteProps);
         await newWebsite.save();
     }
+
+    async getWebsitesWithName(name: string): Promise<Website[]> {
+        return await this.WebsiteModel.find({ name: name})
+    }
 }
