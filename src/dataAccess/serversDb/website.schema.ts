@@ -16,6 +16,8 @@ export class Website {
         this.link = link;
         this.votes = votes;
     }
+
+    _id: string;
     
     @Prop({ required: true})
     name: string;

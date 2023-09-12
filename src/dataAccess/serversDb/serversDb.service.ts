@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel, MongooseModule } from '@nestjs/mongoose';
-import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registerWebsiteDto';
-import { Website } from './schemas/website.schema';
-import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, isObjectIdOrHexString, isValidObjectId } from 'mongoose';
+import { Website } from './website.schema';
 
 @Injectable()
 export class ServersDbService {
@@ -21,28 +20,32 @@ export class ServersDbService {
         return (await this.WebsiteModel.findOne({ username: username})).password === password;
     }
 
-    async registerWebsite(registerWebsiteDto : RegisterWebsiteDto): Promise<void> {
-        const websiteProps = new Website(
-            registerWebsiteDto.name,
-            registerWebsiteDto.username,
-            registerWebsiteDto.password,
-            registerWebsiteDto.category,
-            registerWebsiteDto.tags,
-            registerWebsiteDto.description,
-            registerWebsiteDto.email,
-            registerWebsiteDto.link,
-            0
-            );
-
-        const newWebsite = new this.WebsiteModel(websiteProps);
-        await newWebsite.save();
+    async insertWebsite(website: Website): Promise<void> {
+        const websiteModel = new this.WebsiteModel(website);
+        await websiteModel.save();
     }
 
     async getWebsitesWithName(name: string): Promise<Website[]> {
-        return await this.WebsiteModel.find({ name: name})
+        return (await this.WebsiteModel.find({ name: name}))
     }
 
     async deleteWebsite(username: string): Promise<void> {
         await this.WebsiteModel.deleteOne({username: username});
+    }
+
+    async getWebsiteById(id: string): Promise<Website> {
+        return await this.WebsiteModel.findById(id);
+    }
+
+    async websiteExists(id: string): Promise<boolean> {
+        return await this.WebsiteModel.exists({_id: id}) !== null;
+    }
+
+    async incrementWebsiteVotes(id: string): Promise<void> {
+        await this.WebsiteModel.updateOne({ _id: id}, { $inc: { votes: 1 } })
+    }
+
+    isValidId(id: string): boolean {
+        return isValidObjectId(id);
     }
 }

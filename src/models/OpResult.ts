@@ -4,5 +4,8 @@ export enum OpResult {
     EmailTaken,
     UserNotExist,
     IncorrectPassword,
-    SessionNotFound
+    SessionNotFound,
+    VotedToday,
+    WebsiteNotExist,
+    InvalidId
 }

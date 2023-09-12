@@ -23,7 +23,7 @@ export class RegisterController extends AccountManagementBaseController {
       return res.status(200).json()
     }
     
-    const responseObj = resultMapping[formValidationResult]
+    const responseObj = resultMapping[formValidationResult];
     return res.status(responseObj.statusCode).json({ message: responseObj.message});
   }
 }

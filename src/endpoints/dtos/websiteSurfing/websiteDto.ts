@@ -1,5 +1,6 @@
 export class WebsiteDto {
-    constructor(name: string, description: string, link: string, category: string, tags: string[], votes: number) {
+    constructor(id: string, name: string, description: string, link: string, category: string, tags: string[], votes: number) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.link = link;
@@ -8,6 +9,7 @@ export class WebsiteDto {
         this.votes = votes;
     }
 
+    id: string;
     name: string;
     description: string;
     link: string;

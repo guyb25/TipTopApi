@@ -1,6 +1,6 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { WebsiteModel } from './schemas/website.schema';
+import { WebsiteModel } from './website.schema';
 import { ServersDbService } from './serversDb.service';
 
 @Module({})

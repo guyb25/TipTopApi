@@ -1,5 +1,6 @@
 import { Injectable, Res } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
+import { Website } from 'src/dataAccess/serversDb/website.schema';
 import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registerWebsiteDto';
 import { OpResult } from 'src/models/OpResult';
 
@@ -21,6 +22,16 @@ export class RegisterService {
   }
 
   async register(registerWebsiteDto: RegisterWebsiteDto): Promise<void> {
-    await this.serversDbService.registerWebsite(registerWebsiteDto);
+    await this.serversDbService.insertWebsite(new Website(
+      registerWebsiteDto.name,
+      registerWebsiteDto.username,
+      registerWebsiteDto.password,
+      registerWebsiteDto.category,
+      registerWebsiteDto.tags,
+      registerWebsiteDto.description,
+      registerWebsiteDto.email,
+      registerWebsiteDto.link,
+      0
+      ));
   }
 }

@@ -14,7 +14,7 @@ export class GetWebsitesService {
     for (const name of names) {
         const websitesWithName = await this.serversDbService.getWebsitesWithName(name);
         for (const website of websitesWithName) {
-            websites.push(new WebsiteDto(website.name, website.description, website.link, website.category, website.tags, website.votes));
+            websites.push(new WebsiteDto(website._id, website.name, website.description, website.link, website.category, website.tags, website.votes));
         }
     }
     
