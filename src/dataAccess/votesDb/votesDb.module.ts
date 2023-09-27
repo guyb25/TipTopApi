@@ -5,16 +5,16 @@ import { VotesDbService } from './votesDb.service';
 
 @Module({})
 export class VotesDbModule {
-  static forRoot(connectionString: string) : DynamicModule {
+  static forRoot(connectionString: string): DynamicModule {
     return {
       module: VotesDbModule,
       imports: [
         MongooseModule.forRoot(connectionString),
-        MongooseModule.forFeature([{ name: 'Vote', schema: VoteModel.schema }])
+        MongooseModule.forFeature([{ name: 'Vote', schema: VoteModel.schema }]),
       ],
       controllers: [],
       providers: [VotesDbService],
-      exports: [VotesDbService]
-    }
+      exports: [VotesDbService],
+    };
   }
 }

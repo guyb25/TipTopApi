@@ -10,7 +10,7 @@ export class SessionManagerModule {
       imports: [RedisModule.forRoot(redisHost, redisPort)],
       controllers: [],
       providers: [SessionManagerService],
-      exports: [SessionManagerService]
-    }
+      exports: [SessionManagerService],
+    };
   }
 }

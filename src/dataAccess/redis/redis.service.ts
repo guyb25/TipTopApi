@@ -5,10 +5,13 @@ import Redis from 'ioredis';
 export class RedisService {
   private redisClient: Redis;
 
-  constructor(@Inject('REDIS_HOST') private readonly host: string, @Inject('REDIS_PORT') private readonly port: number) {
+  constructor(
+    @Inject('REDIS_HOST') private readonly host: string,
+    @Inject('REDIS_PORT') private readonly port: number,
+  ) {
     this.redisClient = new Redis({
       host: host,
-      port: port
+      port: port,
     });
   }
 

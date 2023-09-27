@@ -14,10 +14,10 @@ export class RedisModule {
         },
         {
           provide: 'REDIS_PORT',
-          useValue: port
-        }
+          useValue: port,
+        },
       ],
-      exports: [RedisService]
-    }
+      exports: [RedisService],
+    };
   }
 }

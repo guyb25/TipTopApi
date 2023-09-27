@@ -5,16 +5,18 @@ import { ServersDbService } from './serversDb.service';
 
 @Module({})
 export class ServersDbModule {
-  static forRoot(connectionString: string) : DynamicModule {
+  static forRoot(connectionString: string): DynamicModule {
     return {
       module: ServersDbModule,
       imports: [
         MongooseModule.forRoot(connectionString),
-        MongooseModule.forFeature([{ name: 'Website', schema: WebsiteModel.schema }])
+        MongooseModule.forFeature([
+          { name: 'Website', schema: WebsiteModel.schema },
+        ]),
       ],
       controllers: [],
       providers: [ServersDbService],
-      exports: [ServersDbService]
-    }
+      exports: [ServersDbService],
+    };
   }
 }
