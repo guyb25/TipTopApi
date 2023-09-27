@@ -41,19 +41,15 @@ describe('login.controller', () => {
   it('should return a session ID on successful login with status 200', async () => {
     // Arrange
     const expectedSessionId = 'adifjsdf';
-    loginServiceStub.isLoginValid = jest
-      .fn()
-      .mockResolvedValue(OpResult.Success);
+    loginServiceStub.isLoginValid = jest.fn().mockResolvedValue(OpResult.Success);
     loginServiceStub.login = jest.fn().mockResolvedValue(expectedSessionId);
 
     // Act
     await controller.register(loginWebsiteDto, responseMock);
 
-    // Ensure that the controller's result matches your expectations
+    // Assert
     expect(responseMock.status).toHaveBeenCalledWith(200);
-    expect(responseMock.json).toHaveBeenCalledWith({
-      sessionId: expectedSessionId,
-    });
+    expect(responseMock.json).toHaveBeenCalledWith({sessionId: expectedSessionId});
   });
 
   it('should return user not exist with status code 404 on non-existent user', async () => {
@@ -66,27 +62,21 @@ describe('login.controller', () => {
     // Act
     await controller.register(loginWebsiteDto, responseMock);
 
-    // Ensure that the controller's result matches your expectations
+    // Assert
     expect(responseMock.status).toHaveBeenCalledWith(404);
-    expect(responseMock.json).toHaveBeenCalledWith({
-      message: expectedResponse,
-    });
+    expect(responseMock.json).toHaveBeenCalledWith({message: expectedResponse});
   });
 
   it('should return 401 and message on incorrect username/password', async () => {
     // Arrange
     const expectedResponse = "Incorrect username or password";
-    loginServiceStub.isLoginValid = jest
-      .fn()
-      .mockResolvedValue(OpResult.IncorrectPassword);
+    loginServiceStub.isLoginValid = jest.fn().mockResolvedValue(OpResult.IncorrectPassword);
 
     // Act
     await controller.register(loginWebsiteDto, responseMock);
 
-    // Ensure that the controller's result matches your expectations
+    // Assert
     expect(responseMock.status).toHaveBeenCalledWith(401);
-    expect(responseMock.json).toHaveBeenCalledWith({
-      message: expectedResponse,
-    });
+    expect(responseMock.json).toHaveBeenCalledWith({ message: expectedResponse});
   });
 });
