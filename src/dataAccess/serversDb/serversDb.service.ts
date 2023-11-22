@@ -52,6 +52,13 @@ export class ServersDbService {
     await this.WebsiteModel.updateOne({ _id: id }, { $inc: { votes: 1 } });
   }
 
+  async filterWebsites(filter: any, skip: number, limit: number): Promise<Website[]> {
+    return await this.WebsiteModel.find(filter)
+    .skip(skip)
+    .limit(limit)
+    .sort({ votes: -1})
+  }
+
   isValidId(id: string): boolean {
     return isValidObjectId(id);
   }

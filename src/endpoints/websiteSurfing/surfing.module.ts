@@ -1,10 +1,10 @@
 import { Module, DynamicModule } from '@nestjs/common';
-import { GetWebsitesController } from './getWebsites/getWebsites.controller';
-import { GetWebsitesService } from './getWebsites/getWebsites.service';
 import { ServersDbModule } from 'src/dataAccess/serversDb/serversDb.module';
 import { VotesDbModule } from 'src/dataAccess/votesDb/votesDb.module';
 import { VoteController } from './vote/vote.controller';
 import { VoteService } from './vote/vote.service';
+import { FilterController } from './filter/filter.controller';
+import { FilterService } from './filter/filter.service';
 
 @Module({})
 export class SurfingModule {
@@ -12,8 +12,8 @@ export class SurfingModule {
     return {
       module: SurfingModule,
       imports: [ServersDbModule.forRoot(serversDbConnectionString), VotesDbModule.forRoot(votesDbConnectionString)],
-      controllers: [GetWebsitesController, VoteController],
-      providers: [GetWebsitesService, VoteService],
+      controllers: [FilterController, VoteController],
+      providers: [FilterService, VoteService],
     }
   }
 }
