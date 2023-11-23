@@ -9,7 +9,7 @@ export class VoteController extends SurfingBaseController {
     private readonly voteService: VoteService;
 
     @Get("/vote/:websiteId")
-    async register(@Param('websiteId') websiteId: string, @Ip() ip: string, @Res() res: Response): Promise<Response> {
+    async vote(@Param('websiteId') websiteId: string, @Ip() ip: string, @Res() res: Response): Promise<Response> {
         const validationResult = await this.voteService.canVote(ip, websiteId);
 
         const resultMapping = {
