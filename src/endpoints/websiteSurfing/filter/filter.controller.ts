@@ -1,8 +1,8 @@
 import { Body, Post, Inject } from '@nestjs/common';
 import { SurfingBaseController } from '../surfingBase.controller';
 import { FilterService } from './filter.service';
-import { WebsiteDto } from 'src/dtos/websiteSurfing/websiteDto';
-import { FilterDto } from 'src/dtos/websiteSurfing/filterDto';
+import { WebsiteDto } from 'src/models/dtos/websiteSurfing/websiteDto';
+import { FilterDto } from 'src/models/dtos/websiteSurfing/filterDto';
 
 export class FilterController extends SurfingBaseController {
     @Inject(FilterService)

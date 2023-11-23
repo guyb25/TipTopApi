@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { VotesDbService } from 'src/dataAccess/votesDb/votesDb.service';
 import { VoteService } from 'src/endpoints/websiteSurfing/vote/vote.service';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
 
 describe('vote.service', () => {
     let voteService: VoteService
@@ -46,7 +46,7 @@ describe('vote.service', () => {
         const canVote = await voteService.canVote('ip', 'id')
 
         // Assert
-        expect(canVote).toBe(OpResult.InvalidId)
+        expect(canVote).toBe(OpResult.INVALID_WEBSITE_ID)
     });
 
     it('canVote should return websiteNotExist when website doesnt exist', async () => {
@@ -59,7 +59,7 @@ describe('vote.service', () => {
         const canVote = await voteService.canVote('ip', 'id')
 
         // Assert
-        expect(canVote).toBe(OpResult.WebsiteNotExist)
+        expect(canVote).toBe(OpResult.WEBSITE_NOT_EXIST)
     });
 
     it('canVote should return votedToday when the user has already voted today', async () => {
@@ -72,7 +72,7 @@ describe('vote.service', () => {
         const canVote = await voteService.canVote('ip', 'id')
 
         // Assert
-        expect(canVote).toBe(OpResult.VotedToday)
+        expect(canVote).toBe(OpResult.IP_VOTED_TODAY)
     });
 
     it('canVote should return success when the user has all valid parameters', async () => {
@@ -85,6 +85,6 @@ describe('vote.service', () => {
         const canVote = await voteService.canVote('ip', 'id')
 
         // Assert
-        expect(canVote).toBe(OpResult.Success)
+        expect(canVote).toBe(OpResult.SUCCESS)
     });
 });

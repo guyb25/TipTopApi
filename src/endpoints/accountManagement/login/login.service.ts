@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
 
 @Injectable()
 export class LoginService {
@@ -10,14 +10,14 @@ export class LoginService {
 
   async isLoginValid(username: string, password: string): Promise<OpResult> {
     if (!await this.serversDbService.isUsernameTaken(username)) {
-      return OpResult.UserNotExist;
+      return OpResult.USER_NOT_EXIST;
     }
 
     if (!await this.serversDbService.doesUserMatchPassword(username, password)) {
-      return OpResult.IncorrectPassword;
+      return OpResult.INCORRECT_PASSWORD;
     }
 
-    return OpResult.Success;
+    return OpResult.SUCCESS;
   }
 
   async login(username: string) : Promise<string> {

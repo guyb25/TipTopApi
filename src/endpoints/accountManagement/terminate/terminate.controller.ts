@@ -1,9 +1,11 @@
 import { Body, Delete, Inject, Res } from '@nestjs/common';
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
-import { AccountTerminationDto } from 'src/dtos/accountManagement/accountTerminationDto';
+import { AccountTerminationDto } from 'src/models/dtos/accountManagement/accountTerminationDto';
 import { TerminateService } from './terminate.service';
 import { Response } from 'express';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
+import { serverResponses } from 'src/static/ServerResponses';
+import { ServerRes } from 'src/models/response/ServerRes';
 
 export class TerminateController extends AccountManagementBaseController {
   @Inject(TerminateService)
@@ -12,18 +14,13 @@ export class TerminateController extends AccountManagementBaseController {
   @Delete("/terminate")
   async terminate(@Body() terminateAccountDto: AccountTerminationDto, @Res() res: Response): Promise<Response> {
     const validationResult = await this.terminateService.isTerminationFormValid(terminateAccountDto);
-    
-    const resultMapping = {
-      [OpResult.UserNotExist] : { statusCode: 404, message: "The user doesn't exist" },
-      [OpResult.SessionNotFound] : { statusCode: 404, message: "Session not found" }
-    }
 
-    if (validationResult == OpResult.Success) {
+    if (validationResult == OpResult.SUCCESS) {
       await this.terminateService.terminate(terminateAccountDto);
       return res.status(200).json();
     }
 
-    const responseObj = resultMapping[validationResult];
-    return res.status(responseObj.statusCode).json({ message: responseObj.message});
+    const serverResponse: ServerRes = serverResponses[validationResult];
+    return res.status(serverResponse.status).json({ message: serverResponse.message});
   }
 }

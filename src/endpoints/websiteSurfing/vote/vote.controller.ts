@@ -2,7 +2,9 @@ import { Get, Inject, Param, Res, Ip } from '@nestjs/common';
 import { SurfingBaseController } from '../surfingBase.controller';
 import { VoteService } from './vote.service';
 import { Response } from 'express';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
+import { serverResponses } from 'src/static/ServerResponses';
+import { ServerRes } from 'src/models/response/ServerRes';
 
 export class VoteController extends SurfingBaseController {
     @Inject(VoteService)
@@ -12,18 +14,11 @@ export class VoteController extends SurfingBaseController {
     async vote(@Param('websiteId') websiteId: string, @Ip() ip: string, @Res() res: Response): Promise<Response> {
         const validationResult = await this.voteService.canVote(ip, websiteId);
 
-        const resultMapping = {
-            [OpResult.VotedToday] : { statusCode: 403, message: "This IP address has already voted today" },
-            [OpResult.WebsiteNotExist] : { statusCode: 404, message: "The website doesn't exist" },
-            [OpResult.InvalidId] : { statusCode: 400, message: "Website id is invalid" },
-          }
-
-        if (validationResult == OpResult.Success) {
+        if (validationResult == OpResult.SUCCESS) {
             await this.voteService.vote(websiteId, ip);
-            return res.status(200).json();
         }
 
-        const responseObj = resultMapping[validationResult];
-        return res.status(responseObj.statusCode).json({ message: responseObj.message});
+        const serverResponse: ServerRes = serverResponses[validationResult]
+        return res.status(serverResponse.status).json({ message: serverResponse.message});
     }
 }

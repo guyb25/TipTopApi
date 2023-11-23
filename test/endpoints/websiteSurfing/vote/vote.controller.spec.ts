@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { Test, TestingModule } from '@nestjs/testing';
 import { VoteController } from 'src/endpoints/websiteSurfing/vote/vote.controller';
 import { VoteService } from 'src/endpoints/websiteSurfing/vote/vote.service';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
 
 describe('vote.controller', () => {
     let voteController: VoteController
@@ -33,7 +33,7 @@ describe('vote.controller', () => {
 
     it('should return VotedToday when ip has already voted today', async () => {
         // Arrange
-        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.VotedToday)
+        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.IP_VOTED_TODAY)
 
         // Act
         await voteController.vote('id', 'ip', responseMock)
@@ -45,7 +45,7 @@ describe('vote.controller', () => {
 
     it('should return WebsiteNotExist when the website doesnt exist', async () => {
         // Arrange
-        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.WebsiteNotExist)
+        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.WEBSITE_NOT_EXIST)
 
         // Act
         await voteController.vote('id', 'ip', responseMock)
@@ -57,7 +57,7 @@ describe('vote.controller', () => {
 
     it('should return InvalidId when the website id is invalid', async () => {
         // Arrange
-        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.InvalidId)
+        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.INVALID_WEBSITE_ID)
 
         // Act
         await voteController.vote('id', 'ip', responseMock)
@@ -71,7 +71,7 @@ describe('vote.controller', () => {
         // Arrange
         const id = 'id'
         const ip = 'ip'
-        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.Success)
+        voteServiceStub.canVote = jest.fn().mockReturnValue(OpResult.SUCCESS)
 
         // Act
         await voteController.vote(id, ip, responseMock)

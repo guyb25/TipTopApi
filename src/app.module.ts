@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AccountManagementModule } from './endpoints/accountManagement/accountManagement.module';
 import { SurfingModule } from './endpoints/websiteSurfing/surfing.module';
-import { mongoConfig, redisConfig } from './config/config';
+import { mongoConfig, redisConfig } from './static/config';
 import { LivenessModule } from './endpoints/liveness/liveness.module';
 
 @Module({

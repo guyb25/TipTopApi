@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
 
 @Injectable()
 export class LogoutService {
@@ -11,10 +11,10 @@ export class LogoutService {
 
   async canLogout(sessionKey: string): Promise<OpResult> {
     if (await this.sessionManagerService.getSession(sessionKey) === null) {
-      return OpResult.SessionNotFound;
+      return OpResult.SESSION_NOT_FOUND;
     }
 
-    return OpResult.Success;
+    return OpResult.SUCCESS;
   }
 
   async logout(sessionKey: string): Promise<void> {

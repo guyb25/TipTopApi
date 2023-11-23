@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { LoginService } from 'src/endpoints/accountManagement/login/login.service';
-import { OpResult } from 'src/models/OpResult';
+import { OpResult } from 'src/models/response/OpResult';
 
 describe('login.service', () => {
     let loginService: LoginService;
@@ -41,7 +41,7 @@ describe('login.service', () => {
         const result = await loginService.isLoginValid('existinguser', 'correctpassword');
         
         // Assert
-        expect(result).toBe(OpResult.Success);
+        expect(result).toBe(OpResult.SUCCESS);
     });
   
     it('should return OpResult.UserNotExist when username does not exist', async () => {
@@ -52,7 +52,7 @@ describe('login.service', () => {
         const result = await loginService.isLoginValid('nonexistentuser', 'password');
 
         // Assert
-        expect(result).toBe(OpResult.UserNotExist);
+        expect(result).toBe(OpResult.USER_NOT_EXIST);
     });
     
     it('should return OpResult.IncorrectPassword when password is incorrect', async () => {
@@ -64,6 +64,6 @@ describe('login.service', () => {
         const result = await loginService.isLoginValid('existinguser', 'wrongpassword');
 
         // Assert
-        expect(result).toBe(OpResult.IncorrectPassword);
+        expect(result).toBe(OpResult.INCORRECT_PASSWORD);
     });
 });

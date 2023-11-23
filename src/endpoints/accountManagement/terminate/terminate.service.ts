@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
-import { AccountTerminationDto } from 'src/dtos/accountManagement/accountTerminationDto';
-import { OpResult } from 'src/models/OpResult';
+import { AccountTerminationDto } from 'src/models/dtos/accountManagement/accountTerminationDto';
+import { OpResult } from 'src/models/response/OpResult';
 
 @Injectable()
 export class TerminateService {
@@ -11,14 +11,14 @@ export class TerminateService {
 
   async isTerminationFormValid(terminateAccountDto: AccountTerminationDto): Promise<OpResult> {
     if (!await this.serversDbService.isUsernameTaken(terminateAccountDto.username)) {
-      return OpResult.UserNotExist;
+      return OpResult.USER_NOT_EXIST;
     }
 
     if (await this.sessionManager.getSession(terminateAccountDto.sessionId) !== terminateAccountDto.username) {
-      return OpResult.SessionNotFound;
+      return OpResult.SESSION_NOT_FOUND;
     }
 
-    return OpResult.Success;
+    return OpResult.SUCCESS;
   }
 
   async terminate(terminateAccountDto: AccountTerminationDto): Promise<void> {
