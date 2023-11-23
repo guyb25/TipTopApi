@@ -3,10 +3,10 @@ import { OpResult } from 'src/models/response/OpResult';
 import { Test, TestingModule } from '@nestjs/testing';
 import { RegisterController } from 'src/endpoints/accountManagement/register/register.controller';
 import { RegisterService } from 'src/endpoints/accountManagement/register/register.service';
-import { RegisterWebsiteDto } from 'src/models/dtos/accountManagement/registerWebsiteDto';
 import { serverResponses } from 'src/static/ServerResponses';
+import { registerWebsiteDtoStub } from './commonDtoStub';
 
-describe('login.controller', () => {
+describe('register.controller', () => {
   let registerController: RegisterController;
   let registerServiceStub: RegisterService;
 
@@ -14,18 +14,6 @@ describe('login.controller', () => {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   } as any as Response;
-
-  const registerWebsiteDtoStub: RegisterWebsiteDto = {
-    name: 'name',
-    username: 'username',
-    password: 'password',
-    description: 'description',
-    banner: 'banner',
-    category: 'category',
-    tags: ['tag1', 'tag2'],
-    email: 'email@gmail.com',
-    link: 'link'
-  }
 
   beforeEach(async () => {
     const module : TestingModule = await Test.createTestingModule({
