@@ -6,7 +6,7 @@ import { terminateAccountDtoStub } from './terminateAccountDtoStub'
 import { responseMock } from 'test/endpoints/responseMock'
 import { serverResponses } from 'src/static/ServerResponses'
 
-describe('logout.controller', () => {
+describe('terminate.controller', () => {
   let terminateController: TerminateController
   let terminateServiceStub: TerminateService
 
