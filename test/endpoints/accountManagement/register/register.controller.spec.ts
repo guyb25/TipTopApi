@@ -1,19 +1,14 @@
-import { Response } from 'express';
 import { OpResult } from 'src/models/response/OpResult';
 import { Test, TestingModule } from '@nestjs/testing';
 import { RegisterController } from 'src/endpoints/accountManagement/register/register.controller';
 import { RegisterService } from 'src/endpoints/accountManagement/register/register.service';
 import { serverResponses } from 'src/static/ServerResponses';
 import { registerWebsiteDtoStub } from './commonDtoStub';
+import { responseMock } from 'test/endpoints/responseMock';
 
 describe('register.controller', () => {
   let registerController: RegisterController;
   let registerServiceStub: RegisterService;
-
-  const responseMock = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  } as any as Response;
 
   beforeEach(async () => {
     const module : TestingModule = await Test.createTestingModule({

@@ -1,18 +1,13 @@
-import { Response } from 'express';
 import { Test, TestingModule } from '@nestjs/testing';
 import { VoteController } from 'src/endpoints/websiteSurfing/vote/vote.controller';
 import { VoteService } from 'src/endpoints/websiteSurfing/vote/vote.service';
 import { OpResult } from 'src/models/response/OpResult';
 import { serverResponses } from 'src/static/ServerResponses';
+import { responseMock } from 'test/endpoints/responseMock';
 
 describe('vote.controller', () => {
     let voteController: VoteController
     let voteServiceStub: VoteService
-    
-    const responseMock = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-    } as any as Response;
 
     beforeEach(async () => {
         const module : TestingModule = await Test.createTestingModule({

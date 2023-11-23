@@ -1,10 +1,10 @@
-import { Response } from 'express'
 import { LoginController } from 'src/endpoints/accountManagement/login/login.controller'
 import { LoginWebsiteDto } from 'src/models/dtos/accountManagement/loginWebsiteDto'
 import { OpResult } from 'src/models/response/OpResult'
 import { Test, TestingModule } from '@nestjs/testing'
 import { LoginService } from 'src/endpoints/accountManagement/login/login.service'
 import { serverResponses } from 'src/static/ServerResponses'
+import { responseMock } from 'test/endpoints/responseMock'
 
 describe('login.controller', () => {
   let controller: LoginController
@@ -14,11 +14,6 @@ describe('login.controller', () => {
     username: 'testuser',
     password: 'testpassword',
   }
-
-  const responseMock = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  } as any as Response
 
   beforeEach(async () => {
     const module : TestingModule = await Test.createTestingModule({
