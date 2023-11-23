@@ -4,6 +4,7 @@ import { LoginWebsiteDto } from 'src/models/dtos/accountManagement/loginWebsiteD
 import { OpResult } from 'src/models/response/OpResult';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginService } from 'src/endpoints/accountManagement/login/login.service';
+import { serverResponses } from 'src/static/ServerResponses';
 
 describe('login.controller', () => {
   let controller: LoginController;
@@ -48,13 +49,12 @@ describe('login.controller', () => {
     await controller.register(loginWebsiteDto, responseMock);
 
     // Assert
-    expect(responseMock.status).toHaveBeenCalledWith(200);
+    expect(responseMock.status).toHaveBeenCalledWith(serverResponses.success.status);
     expect(responseMock.json).toHaveBeenCalledWith({sessionId: expectedSessionId});
   });
 
   it('should return user not exist with status code 404 on non-existent user', async () => {
     // Arrange
-    const expectedResponse = "The username doesn't exist";
     loginServiceStub.isLoginValid = jest
       .fn()
       .mockResolvedValue(OpResult.USER_NOT_EXIST);
@@ -63,20 +63,19 @@ describe('login.controller', () => {
     await controller.register(loginWebsiteDto, responseMock);
 
     // Assert
-    expect(responseMock.status).toHaveBeenCalledWith(404);
-    expect(responseMock.json).toHaveBeenCalledWith({message: expectedResponse});
+    expect(responseMock.status).toHaveBeenCalledWith(serverResponses.userNotExist.status);
+    expect(responseMock.json).toHaveBeenCalledWith({message: serverResponses.userNotExist.message});
   });
 
   it('should return 401 and message on incorrect username/password', async () => {
     // Arrange
-    const expectedResponse = "Incorrect username or password";
     loginServiceStub.isLoginValid = jest.fn().mockResolvedValue(OpResult.INCORRECT_PASSWORD);
 
     // Act
     await controller.register(loginWebsiteDto, responseMock);
 
     // Assert
-    expect(responseMock.status).toHaveBeenCalledWith(401);
-    expect(responseMock.json).toHaveBeenCalledWith({ message: expectedResponse});
+    expect(responseMock.status).toHaveBeenCalledWith(serverResponses.incorrectPassword.status);
+    expect(responseMock.json).toHaveBeenCalledWith({ message: serverResponses.incorrectPassword.message});
   });
 });

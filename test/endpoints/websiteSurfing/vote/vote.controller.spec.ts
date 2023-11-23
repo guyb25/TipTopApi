@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { VoteController } from 'src/endpoints/websiteSurfing/vote/vote.controller';
 import { VoteService } from 'src/endpoints/websiteSurfing/vote/vote.service';
 import { OpResult } from 'src/models/response/OpResult';
+import { serverResponses } from 'src/static/ServerResponses';
 
 describe('vote.controller', () => {
     let voteController: VoteController
@@ -18,11 +19,11 @@ describe('vote.controller', () => {
         controllers: [VoteController],
         providers: [
             {
-            provide: VoteService,
-            useValue: {
-                canVote: jest.fn(),
-                vote: jest.fn()
-            }
+                provide: VoteService,
+                useValue: {
+                    canVote: jest.fn(),
+                    vote: jest.fn()
+                }
             }
         ],
         }).compile();
@@ -39,8 +40,8 @@ describe('vote.controller', () => {
         await voteController.vote('id', 'ip', responseMock)
 
         // Assert
-        expect(responseMock.status).toHaveBeenCalledWith(403)
-        expect(responseMock.json).toHaveBeenCalledWith({ message: "This IP address has already voted today" })
+        expect(responseMock.status).toHaveBeenCalledWith(serverResponses.ipVotedToday.status)
+        expect(responseMock.json).toHaveBeenCalledWith({ message: serverResponses.ipVotedToday.message })
     })
 
     it('should return WebsiteNotExist when the website doesnt exist', async () => {
@@ -51,8 +52,8 @@ describe('vote.controller', () => {
         await voteController.vote('id', 'ip', responseMock)
 
         // Assert
-        expect(responseMock.status).toHaveBeenCalledWith(404)
-        expect(responseMock.json).toHaveBeenCalledWith({ message: "The website doesn't exist" })
+        expect(responseMock.status).toHaveBeenCalledWith(serverResponses.websiteNotExist.status )
+        expect(responseMock.json).toHaveBeenCalledWith({ message: serverResponses.websiteNotExist.message })
     })
 
     it('should return InvalidId when the website id is invalid', async () => {
@@ -63,8 +64,8 @@ describe('vote.controller', () => {
         await voteController.vote('id', 'ip', responseMock)
 
         // Assert
-        expect(responseMock.status).toHaveBeenCalledWith(400)
-        expect(responseMock.json).toHaveBeenCalledWith({ message: "Website id is invalid" })
+        expect(responseMock.status).toHaveBeenCalledWith(serverResponses.invalidWebsiteId.status)
+        expect(responseMock.json).toHaveBeenCalledWith({ message: serverResponses.invalidWebsiteId.message })
     })
 
     it('should return success when the website can be voted for', async () => {
@@ -78,6 +79,6 @@ describe('vote.controller', () => {
 
         // Assert
         expect(voteServiceStub.vote).toHaveBeenCalledWith(id, ip)
-        expect(responseMock.status).toHaveBeenCalledWith(200)
+        expect(responseMock.status).toHaveBeenCalledWith(serverResponses.success.status)
     })
 });
