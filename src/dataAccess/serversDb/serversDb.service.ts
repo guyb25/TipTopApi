@@ -52,8 +52,22 @@ export class ServersDbService {
     await this.WebsiteModel.updateOne({ _id: id }, { $inc: { votes: 1 } });
   }
 
-  async filterWebsites(filter: any, skip: number, limit: number): Promise<Website[]> {
-    return await this.WebsiteModel.find(filter)
+  async filterWebsites(name: string, category: string, tags: string[], skip: number, limit: number): Promise<Website[]> {
+    let query = {}
+
+    if (name !== undefined) {
+      query['name'] = name
+    }
+
+    if (category !== undefined) {
+      query['category'] = category
+    }
+
+    if (tags !== undefined) {
+      query['tags'] = { "$all": tags }
+    }
+
+    return await this.WebsiteModel.find(query)
     .skip(skip)
     .limit(limit)
     .sort({ votes: -1})

@@ -31,6 +31,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "ioredis": "^5.3.2",
+    "lodash": "^4.17.21",
     "mongoose": "^7.5.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
@@ -46,6 +47,7 @@
     "@nestjs/testing": "^10.2.6",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.5.9",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -76,7 +78,7 @@
       "<rootDir>"
     ],
     "transform": {
-      "^.+\\.(t|j)s$": "babel-jest"
+      "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"

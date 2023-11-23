@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { pickBy } from 'lodash';
+
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { Website } from 'src/dataAccess/serversDb/website.schema';
 import { FilterDto } from 'src/endpoints/dtos/websiteSurfing/filterDto';
@@ -13,18 +15,7 @@ export class FilterService {
   async getWebsites(filter: FilterDto) : Promise<WebsiteDto[]> {
     const websitesDto : WebsiteDto[] = []
 
-    // construct the filter from the DTO
-    const skip = filter.skip
-    const limit = filter.limit
-
-    delete filter.skip
-    delete filter.limit
-
-    const cleanFilter = Object.entries(filter) // get [key,value] pairs
-    .filter((key, value) => value !== undefined) // get only the fields that have values
-    .reduce((prev, [key, value]) => ({ ...prev, [key]: value}), {}) // reconstruct into an object
-
-    const websites: Website[] = await this.serversDbService.filterWebsites(cleanFilter, skip, limit)
+    const websites: Website[] = await this.serversDbService.filterWebsites(filter.name, filter.category, filter.tags, filter.skip, filter.limit)
 
     for (const website of websites) {
       websitesDto.push(
