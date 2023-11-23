@@ -1,4 +1,4 @@
-import { Body, Delete, Inject, Res } from '@nestjs/common';
+import { Body, Delete, HttpStatus, Inject, Res } from '@nestjs/common';
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
 import { AccountTerminationDto } from 'src/models/dtos/accountManagement/accountTerminationDto';
 import { TerminateService } from './terminate.service';
@@ -17,7 +17,7 @@ export class TerminateController extends AccountManagementBaseController {
 
     if (validationResult == OpResult.SUCCESS) {
       await this.terminateService.terminate(terminateAccountDto);
-      return res.status(200).json();
+      return res.status(HttpStatus.OK).json();
     }
 
     const serverResponse: ServerRes = serverResponses[validationResult];
