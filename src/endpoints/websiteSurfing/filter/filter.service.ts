@@ -3,8 +3,8 @@ import { pickBy } from 'lodash';
 
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { Website } from 'src/dataAccess/serversDb/website.schema';
-import { FilterDto } from 'src/endpoints/dtos/websiteSurfing/filterDto';
-import { WebsiteDto } from 'src/endpoints/dtos/websiteSurfing/websiteDto';
+import { FilterDto } from 'src/dtos/websiteSurfing/filterDto';
+import { WebsiteDto } from 'src/dtos/websiteSurfing/websiteDto';
 
 @Injectable()
 export class FilterService {

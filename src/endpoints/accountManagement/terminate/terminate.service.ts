@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
-import { AccountTerminationDto } from 'src/endpoints/dtos/accountManagement/accountTerminationDto';
+import { AccountTerminationDto } from 'src/dtos/accountManagement/accountTerminationDto';
 import { OpResult } from 'src/models/OpResult';
 
 @Injectable()

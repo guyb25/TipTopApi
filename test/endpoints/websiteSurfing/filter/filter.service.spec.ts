@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { FilterService } from 'src/endpoints/websiteSurfing/filter/filter.service';
-import { FilterDto } from 'src/endpoints/dtos/websiteSurfing/filterDto';
+import { FilterDto } from 'src/dtos/websiteSurfing/filterDto';
 import { Website } from 'src/dataAccess/serversDb/website.schema';
-import { WebsiteDto } from 'src/endpoints/dtos/websiteSurfing/websiteDto';
+import { WebsiteDto } from 'src/dtos/websiteSurfing/websiteDto';
 
 describe('filter.service', () => {
     let filterService: FilterService;

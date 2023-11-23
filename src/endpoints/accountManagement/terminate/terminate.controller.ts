@@ -1,6 +1,6 @@
 import { Body, Delete, Inject, Res } from '@nestjs/common';
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
-import { AccountTerminationDto } from 'src/endpoints/dtos/accountManagement/accountTerminationDto';
+import { AccountTerminationDto } from 'src/dtos/accountManagement/accountTerminationDto';
 import { TerminateService } from './terminate.service';
 import { Response } from 'express';
 import { OpResult } from 'src/models/OpResult';

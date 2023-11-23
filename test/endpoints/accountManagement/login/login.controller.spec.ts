@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { LoginController } from 'src/endpoints/accountManagement/login/login.controller';
-import { LoginWebsiteDto } from 'src/endpoints/dtos/accountManagement/loginWebsiteDto';
+import { LoginWebsiteDto } from 'src/dtos/accountManagement/loginWebsiteDto';
 import { OpResult } from 'src/models/OpResult';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoginService } from 'src/endpoints/accountManagement/login/login.service';

@@ -1,5 +1,5 @@
 import { Body, Post, Inject, Res } from '@nestjs/common';
-import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registerWebsiteDto';
+import { RegisterWebsiteDto } from 'src/dtos/accountManagement/registerWebsiteDto';
 import { AccountManagementBaseController } from '../accountManagementBase.controller';
 import { RegisterService } from './register.service';
 import { Response } from 'express';

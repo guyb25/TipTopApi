@@ -1,7 +1,7 @@
 import { Injectable, Res } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { Website } from 'src/dataAccess/serversDb/website.schema';
-import { RegisterWebsiteDto } from 'src/endpoints/dtos/accountManagement/registerWebsiteDto';
+import { RegisterWebsiteDto } from 'src/dtos/accountManagement/registerWebsiteDto';
 import { OpResult } from 'src/models/OpResult';
 
 @Injectable()
