@@ -34,7 +34,7 @@ export class UploadBannerController extends AccountManagementBaseController {
     const loginValidationResult = await this.uploadBannerService.isRequestValid(uploadBannerDto, banner);
     
     if (loginValidationResult === OpResult.SUCCESS) {
-      const fileType = banner.mimetype.slice(banner.mimetype.indexOf('/') + 1)
+      const fileType = banner.mimetype.split('/').pop()
       await this.uploadBannerService.upload(banner, `${uploadBannerDto.websiteId}.${fileType}`);
       return res.status(HttpStatus.OK).json();
     }
