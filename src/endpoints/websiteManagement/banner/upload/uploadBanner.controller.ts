@@ -1,16 +1,16 @@
 import { Body, HttpStatus, Inject, Post, Res, UploadedFile } from '@nestjs/common';
-import { AccountManagementBaseController } from '../../accountManagementBase.controller';
 import { Response } from 'express';
 import { OpResult } from 'src/models/response/OpResult';
 import { serverResponses } from 'src/static/ServerResponses';
 import { ServerRes } from 'src/models/response/ServerRes';
 import { UploadBannerService } from './uploadBanner.service';
-import { UploadBannerDto } from 'src/models/dtos/accountManagement/bannerUploadDto';
+import { UploadBannerDto } from 'src/models/dtos/websiteManagement/bannerUploadDto';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UseInterceptors } from '@nestjs/common/decorators';
+import { WebsiteManagementBaseController } from '../../websiteManagementBase.controller';
 
-export class UploadBannerController extends AccountManagementBaseController {
+export class UploadBannerController extends WebsiteManagementBaseController {
   @Inject(UploadBannerService)
   private readonly uploadBannerService: UploadBannerService;
   

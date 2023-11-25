@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ServersDbService } from 'src/dataAccess/serversDb/serversDb.service';
 import { SessionManagerService } from 'src/dataAccess/sessionManager/sessionManager.service';
 import { OpResult } from 'src/models/response/OpResult';
-import { UploadBannerDto } from 'src/models/dtos/accountManagement/bannerUploadDto';
+import { UploadBannerDto } from 'src/models/dtos/websiteManagement/bannerUploadDto';
 import { BannersStorageService } from 'src/dataAccess/bannersStorage/bannersStorage.service';
 
 @Injectable()

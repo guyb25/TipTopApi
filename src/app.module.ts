@@ -3,6 +3,7 @@ import { AccountManagementModule } from './endpoints/accountManagement/accountMa
 import { SurfingModule } from './endpoints/websiteSurfing/surfing.module';
 import { fsBannersConfig, mongoConfig, redisConfig } from './static/config';
 import { LivenessModule } from './endpoints/liveness/liveness.module';
+import { WebsiteManagementModule } from './endpoints/websiteManagement/websiteManagement.module';
 
 @Module({
   imports: [
@@ -10,13 +11,18 @@ import { LivenessModule } from './endpoints/liveness/liveness.module';
       redisConfig.host,
       redisConfig.port,
       mongoConfig.connectionString,
-      fsBannersConfig.path
     ),
     SurfingModule.forRoot(
       mongoConfig.connectionString,
       mongoConfig.connectionString,
     ),
     LivenessModule,
+    WebsiteManagementModule.forRoot(
+      redisConfig.host,
+      redisConfig.port,
+      mongoConfig.connectionString,
+      fsBannersConfig.path
+    ),
   ],
   controllers: [],
   providers: [],
