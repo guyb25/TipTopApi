@@ -6,3 +6,7 @@ export const redisConfig = {
 export const mongoConfig = {
   connectionString: 'mongodb://localhost:27017',
 };
+
+export const fsBannersConfig = {
+  path: 'banners/'
+}

@@ -7,5 +7,6 @@ export enum OpResult {
   SESSION_NOT_FOUND = 'sessionNotFound',
   IP_VOTED_TODAY = 'ipVotedToday',
   WEBSITE_NOT_EXIST = 'websiteNotExist',
-  INVALID_WEBSITE_ID = 'invalidWebsiteId'
+  INVALID_WEBSITE_ID = 'invalidWebsiteId',
+  INVALID_FILE_TYPE_IMAGE = 'invalidFileType'
 }

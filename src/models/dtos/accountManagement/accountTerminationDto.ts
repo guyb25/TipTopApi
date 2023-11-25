@@ -9,4 +9,15 @@ export class AccountTerminationDto {
     @IsString()
     @ApiProperty()
     sessionId: string;
+
+    @ApiProperty({ 
+        type: 'file',
+        properties: {
+          file: {
+            type: 'string',
+            format: 'binary',
+          },
+        },
+      })
+    banner: any;
 }
