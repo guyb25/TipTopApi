@@ -23,10 +23,14 @@ export class UploadBannerService {
             return OpResult.SESSION_NOT_FOUND
         }
 
+        if (!this.serversDbService.isValidId(uploadBannerDto.websiteId)) {
+            return OpResult.INVALID_WEBSITE_ID
+        }
+
         const website = await this.serversDbService.getWebsiteById(uploadBannerDto.websiteId)
 
-        if (website === undefined || website.username !== username) {
-            return OpResult.INVALID_WEBSITE_ID
+        if (website === null || website.username !== username) {
+            return OpResult.WEBSITE_NOT_EXIST
         }
 
         if (!['image/jpeg', 'image/png'].includes(banner.mimetype)) {
