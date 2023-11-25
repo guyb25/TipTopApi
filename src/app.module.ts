@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AccountManagementModule } from './endpoints/accountManagement/accountManagement.module';
 import { SurfingModule } from './endpoints/websiteSurfing/surfing.module';
-import { mongoConfig, redisConfig } from './static/config';
+import { fsBannersConfig, mongoConfig, redisConfig } from './static/config';
 import { LivenessModule } from './endpoints/liveness/liveness.module';
+import { WebsiteManagementModule } from './endpoints/websiteManagement/websiteManagement.module';
 
 @Module({
   imports: [
@@ -16,6 +17,12 @@ import { LivenessModule } from './endpoints/liveness/liveness.module';
       mongoConfig.connectionString,
     ),
     LivenessModule,
+    WebsiteManagementModule.forRoot(
+      redisConfig.host,
+      redisConfig.port,
+      mongoConfig.connectionString,
+      fsBannersConfig.path
+    ),
   ],
   controllers: [],
   providers: [],

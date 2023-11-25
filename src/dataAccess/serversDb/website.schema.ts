@@ -14,7 +14,7 @@ export class Website {
     description: string,
     email: string,
     link: string,
-    votes: number,
+    votes: number
   ) {
     this.name = name;
     this.username = username;

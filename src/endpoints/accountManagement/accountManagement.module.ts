@@ -15,7 +15,10 @@ export class AccountManagementModule {
   static forRoot(redisHost: string, redisPort: number, mongoDbConnectionString: string): DynamicModule {
     return {
       module: AccountManagementModule,
-      imports: [SessionManagerModule.forRoot(redisHost, redisPort), ServersDbModule.forRoot(mongoDbConnectionString)],
+      imports: [
+        SessionManagerModule.forRoot(redisHost, redisPort), 
+        ServersDbModule.forRoot(mongoDbConnectionString)
+      ],
       controllers: [RegisterController, LoginController, LogoutController, TerminateController],
       providers: [LoginService, LogoutService, RegisterService, TerminateService],
     }

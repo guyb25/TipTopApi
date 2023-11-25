@@ -20,10 +20,6 @@ export class RegisterWebsiteDto {
 
     @IsString()
     @ApiProperty()
-    banner: string;
-
-    @IsString()
-    @ApiProperty()
     category: string;
 
     @IsArray()

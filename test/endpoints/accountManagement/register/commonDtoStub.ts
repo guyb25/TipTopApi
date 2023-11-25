@@ -5,7 +5,6 @@ export const registerWebsiteDtoStub: RegisterWebsiteDto = {
     username: 'username',
     password: 'password',
     description: 'description',
-    banner: 'banner',
     category: 'category',
     tags: ['tag1', 'tag2'],
     email: 'email@gmail.com',
